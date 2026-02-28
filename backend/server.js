@@ -24,6 +24,11 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 
+// Health check route for root URL (Fixes "Cannot GET /" on Vercel)
+app.get('/', (req, res) => {
+    res.json({ message: 'KodFlix Backend is running successfully!' });
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
